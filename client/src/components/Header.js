@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 class Header extends Component {
   renderContent() {
     switch (this.props.auth) {
@@ -13,12 +14,11 @@ class Header extends Component {
     }
   }
   render() {
-    console.log(this.props);
     return (
       <nav>
         <div className="nav-wrapper">
           <Link
-            to={this.props.auth ? 'surveys' : '/'}
+            to={this.props.auth ? 'booking' : '/'}
             className="left brand-logo"
           >
             InstaCar
