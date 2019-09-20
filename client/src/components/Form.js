@@ -3,6 +3,11 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bookCar } from '../actions';
 class Form extends Component {
+  renderList() {
+    return this.props.trips.map(trip => {
+      return <div className="" key={trip.title}></div>;
+    });
+  }
   renderError({ touched, error }) {
     if (touched && error) {
       return (
@@ -24,7 +29,7 @@ class Form extends Component {
     this.props.bookCar(formValues);
   };
   render() {
-    console.log(this.props);
+    console.log(this.props.trips);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Field
@@ -58,12 +63,16 @@ const validate = formValues => {
   return errors;
 };
 
+const mapStateToProps = state => {
+  return { trips: state.trips };
+};
+
 const formWrapped = reduxForm({
   form: 'booking',
   validate
 })(Form);
 
 export default connect(
-  null,
+  mapStateToProps,
   { bookCar }
 )(formWrapped);
