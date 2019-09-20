@@ -1,5 +1,7 @@
 module.exports = app => {
-  app.post('/booking', (req, res) => {
+  app.post('/api/booking', (req, res) => {
     console.log(req.body);
   });
+
+  //app.get('/booking')
 };

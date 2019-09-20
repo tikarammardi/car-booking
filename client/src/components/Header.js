@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import Payments from './Payments';
 class Header extends Component {
   renderContent() {
     switch (this.props.auth) {
       case null:
         return;
       case false:
-        return <a href="/auth/google">Login with G+</a>;
+        return (
+          <li>
+            <a href="/auth/google">Login with G+</a>
+          </li>
+        );
       default:
-        return <a href="/api/logout">Logout</a>;
+        return [
+          <li key="1">
+            <Payments />
+          </li>,
+          <li key="3" style={{ margin: '0 10px' }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key="2">
+            <a href="/api/logout">Logout</a>
+          </li>
+        ];
     }
   }
   render() {
+    console.log(this.props);
     return (
-      <nav>
+      <nav className="light-blue accent-4">
         <div className="nav-wrapper">
           <Link
             to={this.props.auth ? 'booking' : '/'}
@@ -23,9 +38,7 @@ class Header extends Component {
           >
             InstaCar
           </Link>
-          <ul className="right">
-            <li>{this.renderContent()}</li>
-          </ul>
+          <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>
     );
