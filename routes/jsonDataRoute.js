@@ -1,5 +1,5 @@
 module.exports = app => {
-  app.get('/json', (req, res) => {
+  app.get('/api/json', (req, res) => {
     res.send(data);
   });
 };

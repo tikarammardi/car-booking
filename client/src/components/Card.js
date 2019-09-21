@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import { connect } from 'react-redux';
 import { selectTrip } from '../actions';
+import Landing from './Landing';
 
 class Card extends React.Component {
   renderList = () => {
@@ -21,6 +22,7 @@ class Card extends React.Component {
   render() {
     return (
       <div className="">
+        <Landing />
         <ul className="tabs ">{this.renderList()}</ul>
         <div className="">
           <Form />
@@ -31,7 +33,6 @@ class Card extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return { trips: state.trips };
 };
 

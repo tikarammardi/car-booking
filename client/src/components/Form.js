@@ -6,16 +6,12 @@ import momentLocalizer from 'react-widgets-moment';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bookCar, selectTrip } from '../actions';
+import Payments from './Payments';
 
 Moment.locale('en');
 momentLocalizer();
 
 class Form extends Component {
-  renderList() {
-    return this.props.trips.map(trip => {
-      return <div className="" key={trip.title}></div>;
-    });
-  }
   renderError({ touched, error }) {
     if (touched && error) {
       return (
@@ -84,14 +80,7 @@ class Form extends Component {
           />
         </div>
         <div>
-          <button
-            className="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Book Now
-            <i className="material-icons right">send</i>
-          </button>
+          <Payments />
         </div>
       </form>
     );

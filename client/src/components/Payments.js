@@ -13,7 +13,14 @@ class Paymants extends Component {
         stripeKey={process.env.REACT_APP_STRIP_PK}
       >
         {' '}
-        <button className="btn">Add Credit</button>
+        <button
+          className="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Book Now
+          <i className="material-icons right">send</i>
+        </button>
       </StripeCheckout>
     );
   }
