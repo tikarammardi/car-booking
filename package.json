@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "booking-app",
   "version": "1.0.0",
   "description": "Car Booking Assignment",
   "main": "index.js",
