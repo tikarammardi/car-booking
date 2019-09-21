@@ -20,12 +20,9 @@ class Card extends React.Component {
   };
   render() {
     return (
-      <div className="card small">
-        <div className="card-content"></div>
-        <div className="card-tabs">
-          <ul className="tabs tabs-fixed-width">{this.renderList()}</ul>
-        </div>
-        <div className="card-content grey lighten-4">
+      <div className="">
+        <ul className="tabs ">{this.renderList()}</ul>
+        <div className="">
           <Form />
         </div>
       </div>

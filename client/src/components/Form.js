@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+import 'react-widgets/dist/css/react-widgets.css';
+import Moment from 'moment';
+import momentLocalizer from 'react-widgets-moment';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { bookCar } from '../actions';
+import { bookCar, selectTrip } from '../actions';
+
+Moment.locale('en');
+momentLocalizer();
+
 class Form extends Component {
   renderList() {
     return this.props.trips.map(trip => {
@@ -12,44 +20,79 @@ class Form extends Component {
     if (touched && error) {
       return (
         <div>
-          <p className="red lighten-1">{error}</p>
+          <p className="red-text lighten-1">{error}</p>
         </div>
       );
     }
   }
   renderInput = ({ input, label, meta }) => {
+    console.log('testing', input);
     return (
       <div className="input-field">
-        <input {...input} placeholder={label} autoComplete="off" />
+        <input {...input} placeholder={label} />
         {this.renderError(meta)}
       </div>
     );
   };
+
+  renderDateTimePicker = ({ input: { onChange, value, label }, showTime }) => {
+    return (
+      <DateTimePicker
+        onChange={onChange}
+        format="DD MMM YYYY"
+        placeholder={label}
+        alue={new Date()}
+        time={showTime}
+      />
+    );
+  };
+
   onSubmit = formValues => {
     this.props.bookCar(formValues);
   };
   render() {
-    console.log(this.props.trips);
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <Field
+          name="tripType"
+          component={this.renderInput}
+          label="Trip"
+        ></Field>
         <Field
           name="startCity"
           component={this.renderInput}
           label="Depart From"
+          value="Bangalore"
         ></Field>
         <Field
           name="destinationCity"
           component={this.renderInput}
           label="Going To "
         ></Field>
-        <button
-          className="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          Book Now
-          <i className="material-icons right">send</i>
-        </button>
+        <div>
+          <label>Depature Date</label>
+          <Field
+            name="depature_date"
+            label="Depature Date"
+            component={this.renderDateTimePicker}
+          />
+          <label>Return Date</label>
+          <Field
+            name="return_date"
+            showTime={true}
+            component={this.renderDateTimePicker}
+          />
+        </div>
+        <div>
+          <button
+            className="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+          >
+            Book Now
+            <i className="material-icons right">send</i>
+          </button>
+        </div>
       </form>
     );
   }
@@ -60,11 +103,12 @@ const validate = formValues => {
     //if form data is not there
     errors.destinationCity = 'Enter your Destination ';
   }
+
   return errors;
 };
 
 const mapStateToProps = state => {
-  return { trips: state.trips };
+  return { trips: state.trips, selectedTrip: state.selectedTrip };
 };
 
 const formWrapped = reduxForm({
@@ -74,5 +118,5 @@ const formWrapped = reduxForm({
 
 export default connect(
   mapStateToProps,
-  { bookCar }
+  { bookCar, selectTrip }
 )(formWrapped);
