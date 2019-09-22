@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { fetchDriver } from '../actions';
 
 class Info extends Component {
+  componentDidMount() {
+    this.props.fetchDriver();
+  }
   render() {
     return <div>Information</div>;
   }
