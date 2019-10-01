@@ -6,20 +6,20 @@ class Paymants extends Component {
   render() {
     return (
       <StripeCheckout
-        name="Emaily"
-        description="$5 for 5 email credits"
+        name='InstaCar'
+        description='Thank you for your riding with us.'
         amount={500}
         token={token => this.props.handleToken(token)}
         stripeKey={process.env.REACT_APP_STRIP_PK}
       >
         {' '}
         <button
-          className="btn waves-effect waves-light"
-          type="submit"
-          name="action"
+          className='btn waves-effect waves-light'
+          type='submit'
+          name='action'
         >
           Book Now
-          <i className="material-icons right">send</i>
+          <i className='material-icons right'>send</i>
         </button>
       </StripeCheckout>
     );
